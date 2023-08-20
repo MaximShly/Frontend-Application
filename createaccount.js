@@ -24,13 +24,25 @@ function CreateAccount(){
   }
 
   function handleCreate(){
-    console.log(name,email,password);
-    if (!validate(name,     'name'))     return;
-    if (!validate(email,    'email'))    return;
-    if (!validate(password, 'password')) return;
-    ctx.users.push({name,email,password,balance:100});
+    console.log(name, email, password);
+    
+    if (name.trim() === '') {
+        alert('Name field cannot be left blank.');
+        return;
+    }
+    if (email.trim() === '') {
+        alert('Email field cannot be left blank.');
+        return;
+    }
+    if (password.length < 8) {
+        alert('Password should be at least 8 characters long.');
+        return;
+    }
+
+    ctx.users.push({name, email, password, balance: 100});
     setShow(false);
-  }    
+} 
+
 
   function clearForm(){
     setName('');
