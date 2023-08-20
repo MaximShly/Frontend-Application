@@ -8,41 +8,40 @@ function CreateAccount(){
 
   const ctx = React.useContext(UserContext);  
 
-  
   React.useEffect(() => {
     setIsDisabled(name.length < 3 || email.length < 3 || password.length < 8);
-}, [name, email, password]);
+  }, [name, email, password]);
 
-
-  function validate(field, label){
-      if (!field) {
-        setStatus('Error: ' + label);
-        setTimeout(() => setStatus(''),3000);
+  function validateName() {
+    if (name.trim() === '') {
+        alert('Name field cannot be left blank.');
         return false;
-      }
-      return true;
+    }
+    return true;
+  }
+
+  function validateEmail() {
+    if (email.trim() === '') {
+        alert('Email field cannot be left blank.');
+        return false;
+    }
+    return true;
+  }
+
+  function validatePassword() {
+    if (password.length < 8) {
+        alert('Password should be at least 8 characters long.');
+        return false;
+    }
+    return true;
   }
 
   function handleCreate(){
-    console.log(name, email, password);
-    
-    if (name.trim() === '') {
-        alert('Name field cannot be left blank.');
-        return;
-    }
-    if (email.trim() === '') {
-        alert('Email field cannot be left blank.');
-        return;
-    }
-    if (password.length < 8) {
-        alert('Password should be at least 8 characters long.');
-        return;
-    }
+    if (!validateName() || !validateEmail() || !validatePassword()) return;
 
-    ctx.users.push({name, email, password, balance: 100});
+    ctx.users.push({name,email,password,balance:100});
     setShow(false);
-} 
-
+  }    
 
   function clearForm(){
     setName('');
@@ -59,11 +58,11 @@ function CreateAccount(){
       body={show ? (  
               <>
               Name<br/>
-              <input type="input" className="form-control" id="name" placeholder="Enter name" value={name} onChange={e => setName(e.currentTarget.value)} /><br/>
+              <input type="input" className="form-control" id="name" placeholder="Enter name" value={name} onChange={e => setName(e.currentTarget.value)} onBlur={validateName} /><br/>
               Email address<br/>
-              <input type="input" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)}/><br/>
+              <input type="input" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)} onBlur={validateEmail}/><br/>
               Password<br/>
-              <input type="password" className="form-control" id="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.currentTarget.value)}/><br/>
+              <input type="password" className="form-control" id="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.currentTarget.value)} onBlur={validatePassword}/><br/>
               <button type="submit" className="btn btn-light" disabled={isDisabled} onClick={handleCreate}>Create Account</button>
               </>
             ):(
