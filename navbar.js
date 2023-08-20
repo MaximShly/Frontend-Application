@@ -16,17 +16,11 @@ function NavBar() {
                         <li className={`nav-item ${currentPath === '#/CreateAccount/' ? 'active' : ''}`}>
                             <a className="nav-link" href="#/CreateAccount/" title="Create Account">Create Account</a>
                         </li>
-                        <li className={`nav-item ${currentPath === '#/login/' ? 'active' : ''}`}>
-                            <a className="nav-link" href="#/login/" title="Login">Login</a>
-                        </li>
                         <li className={`nav-item ${currentPath === '#/deposit/' ? 'active' : ''}`}>
                             <a className="nav-link" href="#/deposit/" title="Deposit">Deposit</a>
                         </li>
                         <li className={`nav-item ${currentPath === '#/withdraw/' ? 'active' : ''}`}>
                             <a className="nav-link" href="#/withdraw/" title="Withdraw">Withdraw</a>
-                        </li>
-                        <li className={`nav-item ${currentPath === '#/balance/' ? 'active' : ''}`}>
-                            <a className="nav-link" href="#/balance/" title="Balance">Balance</a>
                         </li>
                         <li className={`nav-item ${currentPath === '#/alldata/' ? 'active' : ''}`}>
                             <a className="nav-link" href="#/alldata/" title="All Data">AllData</a>
